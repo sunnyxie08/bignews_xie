@@ -57,7 +57,7 @@
       </div>
     </div>
   </div>
-<script src="./js/http.js"></script>
+  <script src="./js/http.js"></script>
   <script>
     $(function () {
       $('.input_sub').on('click', function (e) {
@@ -82,9 +82,13 @@
           success: function (backData) {
             console.log(backData);
             if (backData.code == 200) {
-              alert(backData.msg);
+              // alert(backData.msg);
+              $('.modal-body').text(backData.msg);
+              $('#myModal').modal();
               localStorage.setItem('token', backData.token);
-              window.location.href = './index.html'
+              $('#myModal').on('hidden.bs.modal', function (e) {
+                window.location.href = './index.html'
+              })
             } else {
               $('.modal-body').text(backData.msg);
               $('#myModal').modal();
